@@ -42,8 +42,7 @@ def recommend(request):
 # List view
 def index(request):
 	movies = Movie.objects.all()
-	query  = request.GET.get('q')
-	if query:
+	if query := request.GET.get('q'):
 		movies = Movie.objects.filter(Q(title__icontains=query)).distinct()
 		return render(request,'web/list.html',{'movies':movies})
 	return render(request,'web/list.html',{'movies':movies})
