@@ -14,4 +14,9 @@ class Myrating(models.Model):
 	user   	= models.ForeignKey(User,on_delete=models.CASCADE) 
 	movie 	= models.ForeignKey(Movie,on_delete=models.CASCADE)
 	rating 	= models.IntegerField(default=1,validators=[MaxValueValidator(5),MinValueValidator(0)])
+
+	def __str__(self):
+		model_name = self.__class__.__name__
+		fields_str = ", ".join((f"{field.name}={getattr(self, field.name)}" for field in self._meta.fields))
+		return f"{model_name}({fields_str})"
 		
